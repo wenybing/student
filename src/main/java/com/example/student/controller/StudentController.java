@@ -2,6 +2,8 @@ package com.example.student.controller;
 
 import com.example.student.bean.Result;
 import com.example.student.bean.Student;
+import com.example.student.exception.StudentEnum;
+import com.example.student.exception.StudentException;
 import com.example.student.service.StudentService;
 import com.example.student.util.ResultUtil;
 import org.springframework.web.bind.annotation.*;
@@ -88,8 +90,10 @@ public class StudentController {
         try {
             studentService.deleteStudent(id);
         } catch (Exception e) {
-            e.printStackTrace();
-            ResultUtil.fail(1, e.getMessage());
+            if (e instanceof StudentException) {
+                return ResultUtil.fail(StudentEnum.DELETE_ERROR.getCode(), StudentEnum.DELETE_ERROR.getMessage());
+            }
+            return ResultUtil.fail(-1, e.getMessage());
         }
         return ResultUtil.success();
     }
