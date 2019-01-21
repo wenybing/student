@@ -1,0 +1,17 @@
+#服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+#数据源配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/student?useUnicode=true&characterEnconding=utf8
+    username: root
+    password: root
+#mybatis配置
+mybatis:
+  type-aliases-package: com.example.student.bean
+  config-location: classpath:/mybatis/mybatis-config.xml
+  mapper-locations: classpath:/mybatis/mapper/StudentMapper.xml
